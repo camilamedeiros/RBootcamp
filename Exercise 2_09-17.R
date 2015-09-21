@@ -150,10 +150,90 @@ pdf(file='C:/Users/Camila Medeiros/Documents/GitHub/R-Bootcamp/Exercise2_SNPsPlo
 
 plot(log_exp_pvals,log_sort_pvals,xlab="-log10(expected P-value)",ylab="-log10(observed P-value)",pch=16)
 
-dev.off()
 
-########################################################
+#########################################################
 
 #h)
 
+abline (a = 0, b = 1, lty = 2, col = 2, lwd = 4)
+
+dev.off()
+
+#########################################################
+
+## 2)
+
+#a)
+
+setwd('C:/Users/Camila Medeiros/Documents/GitHub/R-Bootcamp')
+
+zz <- read.table('C:/Users/Camila Medeiros/Documents/GitHub/R-Bootcamp/pheno.sim.2014.txt', header=TRUE)
+head(zz)
+
+#########################################################
+
+#b)
+
+summary(zz)
+controls <- which(zz$glucose_mmolperL < 4.769)
+controls
+
+#########################################################
+
+#c)
+
+cases <- which(zz$glucose_mmolperL > 7.355)
+cases
+
+#########################################################
+
+#d)
+
+pdf(file='C:/Users/Camila Medeiros/Documents/GitHub/R-Bootcamp/Exercise2_glucose.pdf', width=3.5,height=4)
+
+par(nfrow=c(1,1), mar=c(4,4,3,2))
+
+plot(density(zz[,2]), col=2, lwd=4, xlab='Blood Glucose Levels',lim=c(3,11),main = 'Normal Distribuition')
+
+abline(v=quantile(zz[,2], 0.25), lty=2, lwd=3, col=1)
+abline(v=quantile(zz[,2], 0.75), lty=2, lwd=3, col=1)
+
+dev.off()
+
+##########################################################
+
+#e)
+
+snpsDataFrame=read.table('C:/Users/Camila Medeiros/Documents/GitHub/R-Bootcamp/hapmap_CEU_r23a_chr2_ld-1.txt',header=TRUE)
+head(snpsDataFrame)
+
+
+case_genotypes <- snpsDataFrame ["rs7584086_T", cases]; length(case_genotypes)
+
+##########################################################
+
+#f)
+
+control_genotypes <- snpsDataFrame ["rs7584086_T", controls]; length(control_genotypes)
+
+
+##########################################################
+
+#g)
+
+table(case_genotypes)
+case_genotypes
+#1= 12
+#2= 3
+
+##########################################################
+
+#h)
+
+table(control_genotypes)
+control_genotypes
+#0= 14
+#NA= 1
+
+##########################################################
 
