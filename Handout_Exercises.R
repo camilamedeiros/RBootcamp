@@ -71,6 +71,41 @@ rdVec <- c(-0.3, 0.3, 1.3, 1.9, 2.2, 2.7)
   
 ##########################################################
 
-  
+# 4.1.1 *Mini-exercise
 
+library(deSolve)
   
+expGrowthODE <- function (tt, NN, pars) {
+   derivs <- pars['rr']*NN
+   return(list(derivs))
+  }
+
+init <- 1
+tseq <- seq(0, 100, by=0.01)
+pars <- c(rr = 0.1)
+
+outputexpGrowthODE <- lsoda(init, tseq, expGrowthODE, pars)
+head (outputexpGrowthODE)
+
+plot(outputexpGrowthODE[, 1], outputexpGrowthODE[, 2], col = "darkred", type = "l", lwd = "2", xlab='Time', ylab='N', main='Exponential Growth')
+
+##########################################################
+
+# 4.2.1 *Mini-exercise
+
+library(deSolve)
+
+logGrowthODE <- function (tt, NN, pars) {
+  derivs <- pars['rr']*NN
+  return(list(derivs))
+}
+
+init <- 50
+tseq <- seq(0, 100, by=0.01)
+pars <- c(rr = -0.8, KK = 100)
+
+logGrowthODE <- lsoda(init, tseq, logGrowthODE, pars)
+head (logGrowthODE)
+
+plot(logGrowthODE[, 1], logGrowthODE [, 2], col = "darkred", type = "l", lwd = "1.5", xlab='Time', ylab='N', main='Logistic Growth')
+
